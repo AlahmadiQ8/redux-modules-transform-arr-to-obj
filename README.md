@@ -1,4 +1,4 @@
-code shift for redux-modules middleware. 
+code shift for redux-modules old argument for `createModule` to the new one. 
 
 ```
 transformations: [
