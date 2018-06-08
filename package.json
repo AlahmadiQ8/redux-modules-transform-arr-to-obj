@@ -1,0 +1,24 @@
+{
+  "name": "redux-modules-new-transforms-shape",
+  "version": "1.0.0",
+  "description": "transform 'transforms' property from array to object",
+  "main": "redux-modules-new-transforms-shape.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Mohammad Asad Mohammad <m91.alahmadi@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^23.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.1.0",
+    "jscodeshift": "^0.5.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
