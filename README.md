@@ -1,16 +1,19 @@
-Forked from [reactjs/react-codemod](https://github.com/reactjs/react-codemod)
-
 code shift for redux-modules middleware. 
 
 ```
-import { createModule, middleware } from "redux-modules";
+transformations: [
+  { type: 'init', reducer: state => state },
+  { type: 'add', reducer: state => state + 1 },
+]
 ```
 
 to 
 
 ```
-import { createModule } from "redux-modules";
-import middleware from 'redux-modules-middleware';
+transformations: {
+  init: { reducer: state => state },
+  add: { reducer: state => state + 1},
+}
 ```
 
 
@@ -20,4 +23,4 @@ import middleware from 'redux-modules-middleware';
   - `yarn global add jscodeshift`
 - clone this repo
 - go to your repository that you want to apply the codeshift and run the following: 
-  - `jscodeshift -t <PATH_TO_CLONED_REPO>/to-redux-modules-middleware.js src/`
+  - `jscodeshift -t <PATH_TO_CLONED_REPO>/redux-modules-new-transforms-shape.js src/`
