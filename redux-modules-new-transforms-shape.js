@@ -1,3 +1,23 @@
+function camelCase(str) {
+  if (!isAllUpper(str)) return str
+  const words = str.split('_')
+  if (words.length === 0) return str
+  words[0] = words[0].toLowerCase()
+  for (let i = 1; i < words.length; i++) {
+    words[i] = capitalize(words[i])
+  }
+  return words.join('')
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+}
+
+function isAllUpper(str) {
+  const letters = Array.from(str.replace(/[^a-z]/g, ''))
+  return letters.every(char => char != char.toLowerCase())
+}
+
 export default function transformer(file, api) {
   const j = api.jscodeshift
 
@@ -8,11 +28,17 @@ export default function transformer(file, api) {
       return [...acc, reducer]
     }, [])
 
+    const elementsFiltered = elements.map(el => {
+      const properties = el.properties.filter(prop => prop.key.name !== 'type')
+      el.properties = properties
+      return el
+    })
+
     const obj = reducerNames.map((name, index) =>
       j.property(
         'init',
-        j.identifier(name),
-        j.objectExpression(elements[index].properties)
+        j.identifier(camelCase(name)),
+        j.objectExpression(elementsFiltered[index].properties)
       )
     )
     const prop = j.property(
