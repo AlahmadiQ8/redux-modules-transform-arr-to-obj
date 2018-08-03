@@ -15,10 +15,13 @@ const { name, actions, reducer, constants, selector } = createModule({
   selector: budgetModuleSelector,
   transformations: {
     groupByInit: {
+      type: 'groupByInit',
       reducer: setParamsGroupByReducer,
     },
 
     FETCH: {
+      type: 'FETCH',
+
       middleware: [
         middleware.propCheck({
           id: oneOfType([string, number]),
@@ -31,6 +34,8 @@ const { name, actions, reducer, constants, selector } = createModule({
     },
 
     SET_AGGREGATES: {
+      type: 'SET_AGGREGATES',
+
       middleware: [
         middleware.propCheck({
           id: oneOfType([string, number]).isRequired,
@@ -45,6 +50,8 @@ const { name, actions, reducer, constants, selector } = createModule({
     },
 
     FETCH_SUCCESS: {
+      type: 'FETCH_SUCCESS',
+
       middleware: [
         middleware.propCheck({
           id: oneOfType([string, number]),
@@ -77,6 +84,8 @@ const { name, actions, reducer, constants, selector } = createModule({
     },
 
     FETCH_ERROR: {
+      type: 'FETCH_ERROR',
+
       middleware: [
         middleware.propCheck({
           error: object,
@@ -92,33 +101,42 @@ const { name, actions, reducer, constants, selector } = createModule({
     },
 
     SET_PARAMS_CURRENT_PAGE: {
+      type: 'SET_PARAMS_CURRENT_PAGE',
+
       reducer: (state, { payload }) =>
         state.update('params', params => params.set('page', payload)),
     },
 
     setParamsExpandAll: {
+      type: 'setParamsExpandAll',
       reducer: setParamsExpandAllReducer,
     },
 
     expandAllInit: {
+      type: 'expandAllInit',
       reducer: setParamsExpandAllReducer,
     },
 
     setParamsGroupBy: {
+      type: 'setParamsGroupBy',
       reducer: setParamsGroupByReducer,
     },
 
     filterInit: {
+      type: 'filterInit',
       middleware: [setParamsFilterPropCheck],
       reducer: setParamsFilterReducer,
     },
 
     setParamsFilter: {
+      type: 'setParamsFilter',
       middleware: [setParamsFilterPropCheck],
       reducer: setParamsFilterReducer,
     },
 
     REMOVE_PARAMS_FILTER: {
+      type: 'REMOVE_PARAMS_FILTER',
+
       middleware: [
         middleware.propCheck({
           filter: shape({
@@ -134,14 +152,18 @@ const { name, actions, reducer, constants, selector } = createModule({
     },
 
     RESET_PARAMS_FILTER: {
+      type: 'RESET_PARAMS_FILTER',
       reducer: resetParamsFilterReducer,
     },
 
     RESET_PARAMS_FILTER_FOR_SAVE: {
+      type: 'RESET_PARAMS_FILTER_FOR_SAVE',
       reducer: resetParamsFilterReducer,
     },
 
     SET_INITIAL_PARAMS: {
+      type: 'SET_INITIAL_PARAMS',
+
       reducer: (state, { payload }) => {
         return state.set('params', fromJS(payload))
       },

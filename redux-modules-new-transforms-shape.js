@@ -9,17 +9,11 @@ export default function transformer(file, api) {
       return [...acc, reducer]
     }, [])
 
-    const elementsFiltered = elements.map(el => {
-      const properties = el.properties.filter(prop => prop.key.name !== 'type')
-      el.properties = properties
-      return el
-    })
-
     const obj = reducerNames.map((name, index) =>
       j.property(
         'init',
         j.identifier(name),
-        j.objectExpression(elementsFiltered[index].properties)
+        j.objectExpression(elements[index].properties)
       )
     )
     const prop = j.property(
